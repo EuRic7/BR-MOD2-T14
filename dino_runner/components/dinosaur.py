@@ -8,7 +8,7 @@ Y_POS = 220
 JUMP_VEL = 8.5
 
 
-class Dinosaur:
+class Dinosaur(pygame.sprite.Sprite):
     def __init__(self):
         self.image = RUNNING[0]
         self.dino_rect = self.image.get_rect()
