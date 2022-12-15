@@ -11,6 +11,7 @@ class ObstacleManager:
     def __init__(self):
         self.obstacles = []
 
+
     def update(self, game):
         obstacle_type = [
             Cactus(),
@@ -26,10 +27,14 @@ class ObstacleManager:
         for obstacle in self.obstacles:
             obstacle.update(game.game_speed, self.obstacles)
             if game.player.dino_rect.colliderect(obstacle.rect):
-                pygame.time.delay(500)
-                game.playing = False
-                game.death_count += 1
-                break
+                if not game.player.has_power_up:
+                    pygame.time.delay(500)
+                    game.playing = False
+                    game.death_count += 1
+                    break
+                else:
+                    self.obstacles.remove(obstacle)
+
     def reset_obstacles(self):
         self.obstacles = []
 

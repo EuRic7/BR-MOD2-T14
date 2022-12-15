@@ -7,10 +7,13 @@ from dino_runner.utils.constants import (
     SCREEN_HEIGHT,
     SCREEN_WIDTH,
     TITLE,
+    DEFAULT_TYPE,
 )
 from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 from dino_runner.utils.text_utils import draw_message_component
+from dino_runner.components.power_ups.power_up_manager import PowerUpManager
+
 class Game:
     def __init__(self):
         pygame.init()
@@ -28,7 +31,7 @@ class Game:
         self.y_pos_bg = 300
         self.player = Dinosaur()
         self.obstacle_manager = ObstacleManager()
-
+        self.power_up_manager = PowerUpManager()
     def execute(self):
         self.running = True
         while self.running:
@@ -41,6 +44,7 @@ class Game:
         # Game loop: events - update - draw
         self.playing = True
         self.obstacle_manager.reset_obstacles()
+        self.power_up_manager.reset_power_ups()
         self.game_speed = 20
         self.score = 0
 
@@ -61,6 +65,8 @@ class Game:
         self.player.update(user_input)
         self.obstacle_manager.update(self)
         self.update_score()
+        self.power_up_manager.update(self.score, self.game_speed, self.player)
+
     def update_score(self):
         self.score += 1
         if self.score % 100 == 0:
@@ -75,6 +81,8 @@ class Game:
         self.player.draw(self.screen)
         self.obstacle_manager.draw(self.screen)
         self.draw_score()
+        self.draw_power_up_time()
+        self.power_up_manager.draw(self.screen)
         pygame.display.update()
         pygame.display.flip()
 
@@ -94,7 +102,23 @@ class Game:
             pos_y_center=50,
 
         )
+    def draw_power_up_time(self):
+        if self.player.has_power_up:
+            time_to_show = round(
+                (self.player.power_up_time - pygame.time.get_ticks()) / 1000,
+                2
+            )
+            if time_to_show >= 0:
+                draw_message_component(
+                    f"{self.player.type} enabled for {time_to_show} seconds",
+                    self.screen,
+                    pos_x_center=500,
+                    pos_y_center=40,
 
+                )
+            else:
+                self.player.has_power_up = False
+                self.player.type = DEFAULT_TYPE
     def handle_events_menu(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
