@@ -5,7 +5,7 @@ import pygame
 from dino_runner.utils.constants import SMALL_CACTUS
 from dino_runner.components.obstacles.cactus import Cactus
 from dino_runner.components.obstacles.bird import Bird
-
+from dino_runner.components.obstacles.meteor import Meteor
 
 class ObstacleManager:
     def __init__(self):
@@ -15,11 +15,12 @@ class ObstacleManager:
         obstacle_type = [
             Cactus(),
             Bird(),
+            Meteor(),
         ]
 
         if len(self.obstacles) == 0:
             self.obstacles.append(
-                obstacle_type[random.randint(0, 1)]
+                obstacle_type[random.randint(0, 2)]
             )
 
         for obstacle in self.obstacles:

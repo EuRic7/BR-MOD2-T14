@@ -70,6 +70,11 @@ BIRD = [
     pygame.image.load(os.path.join(IMG_DIR, "Bird/Bird1.png")),
     pygame.image.load(os.path.join(IMG_DIR, "Bird/Bird2.png")),
 ]
+METEOR = [
+    pygame.image.load(os.path.join(IMG_DIR, "Other/meteoro.png")),
+    pygame.image.load(os.path.join(IMG_DIR, "Other/meteoro.png")),
+
+]
 
 # Doodads
 CLOUD = pygame.image.load(os.path.join(IMG_DIR, "Other/Cloud.png"))

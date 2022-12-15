@@ -20,6 +20,7 @@ class Game:
         self.clock = pygame.time.Clock()
         self.playing = False
         self.score = 0
+        self.best_score = 0
         self.running = False
         self.death_count = 0
         self.game_speed = 20
@@ -42,6 +43,7 @@ class Game:
         self.obstacle_manager.reset_obstacles()
         self.game_speed = 20
         self.score = 0
+
         while self.playing:
             self.events()
             self.update()
@@ -63,6 +65,8 @@ class Game:
         self.score += 1
         if self.score % 100 == 0:
             self.game_speed += 1
+        if self.score > self.best_score:
+            self.best_score = self.score
 
     def draw(self):
         self.clock.tick(FPS)
@@ -122,6 +126,18 @@ class Game:
                 self.screen,
                 pos_y_center=half_screen_height -150
             )
+
+
+
+            ##Mostrar Melhor score
+            draw_message_component(
+                f"Best Score: {self.best_score}",
+                self.screen,
+                pos_y_center=half_screen_height - 200
+            )
+
+
+
             draw_message_component(
                 f"Death count: {self.death_count}",
                 self.screen,

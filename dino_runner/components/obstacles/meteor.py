@@ -1,12 +1,9 @@
-import random
-
-from dino_runner.components.dinosaur import Y_POS
 from dino_runner.components.obstacles.obstacle import Obstacle
-from dino_runner.utils.constants import BIRD
-
-class Bird(Obstacle):
+from dino_runner.utils.constants import METEOR
+import random
+class Meteor(Obstacle):
     def __init__(self):
-        super().__init__(BIRD, 0)
+        super().__init__(METEOR, 0)
         self.rect.y = random.randint(20, 200)
         self.step_index = 0
     def draw(self, screen):
