@@ -17,8 +17,11 @@ from dino_runner.components.shots.projeteis import Projeteis
 Y_POS_DUCK = 280
 X_POS = 80
 Y_POS = 220
+
+#Posição do Projétil
 p_x_pos = 100
 p_y_pos = 250
+
 
 JUMP_VEL = 8.5
 
@@ -50,11 +53,18 @@ class Dinosaur(pygame.sprite.Sprite):
         self.dino_jump = False
         self.dino_firing = False
         self.setup_state()
-        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
+        self.screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT)) #CONF TELA
+
         self.projetil_y_pos = p_y_pos
         self.projetil_x_pos = p_x_pos
         self.ret_vermelho = pygame.draw.circle(self.screen, (255, 0, 0), (self.projetil_x_pos, self.projetil_y_pos), 20)
         self.count = 0
+
+        # Cor do projétil (apenas para não aparecer no início da apresentação
+
+        self.color_white = (255, 255, 255)
+        self.color_red = (255, 0, 0)
+        self.color = self.color_white
             #pygame.draw.rect(self.screen, (255, 0, 0), (self.projetil_x_pos, self.projetil_y_pos, 40, 50))
 
         #self.muni = Projeteis()
@@ -119,6 +129,7 @@ class Dinosaur(pygame.sprite.Sprite):
             self.firing()
         if user_input[pygame.K_LEFT]:
             self.dino_firing = True
+            self.color = self.color_red
 
         if user_input[pygame.K_UP] and not self.dino_jump:
             self.dino_jump = True
@@ -141,7 +152,7 @@ class Dinosaur(pygame.sprite.Sprite):
         self.p_pos_reset()
     def draw(self, screen):
         screen.blit(self.image, (self.dino_rect.x, self.dino_rect.y))
-        self.ret_vermelho = pygame.draw.circle(self.screen, (255, 0, 0), (self.projetil_x_pos, self.projetil_y_pos), 20)
+        self.ret_vermelho = pygame.draw.circle(self.screen, self.color, (self.projetil_x_pos, self.projetil_y_pos), 20)
 
         #self.muni.retangulo()
     def p_pos_reset(self):

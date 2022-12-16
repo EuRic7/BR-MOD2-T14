@@ -40,7 +40,7 @@ class ObstacleManager:
                     self.obstacles.remove(obstacle)
             if obstacle.rect.colliderect(game.player.ret_vermelho):
                 self.obstacles.remove(obstacle)
-                game.score += 1000
+                game.score += 100
     def reset_obstacles(self):
         self.obstacles = []
 

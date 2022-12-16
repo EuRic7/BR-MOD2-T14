@@ -32,8 +32,8 @@ class Game:
         self.player = Dinosaur()
         self.obstacle_manager = ObstacleManager()
         self.power_up_manager = PowerUpManager()
-        self.ret_x_pos = 80
-        self.ret_y_pos = 220
+        #self.ret_x_pos = 80
+        #self.ret_y_pos = 220
         #self.ret_vermelho = pygame.draw.rect(self.screen, (255, 0, 0),
              #                                (self.ret_x_pos, self.ret_y_pos, 40, 50))
 
@@ -79,7 +79,7 @@ class Game:
         self.score += 1
         if self.score % 100 == 0:
             self.game_speed += 1
-        if self.score > self.best_score:
+        if self.score > self.best_score:      ### DEFINIÇÃO DA MELHOR PONTUAÇAO
             self.best_score = self.score
 
     def draw(self):
