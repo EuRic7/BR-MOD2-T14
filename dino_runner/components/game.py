@@ -13,7 +13,7 @@ from dino_runner.components.dinosaur import Dinosaur
 from dino_runner.components.obstacles.obstacle_manager import ObstacleManager
 from dino_runner.utils.text_utils import draw_message_component
 from dino_runner.components.power_ups.power_up_manager import PowerUpManager
-
+from dino_runner.components.shots.projeteis import Projeteis
 class Game:
     def __init__(self):
         pygame.init()
@@ -32,6 +32,11 @@ class Game:
         self.player = Dinosaur()
         self.obstacle_manager = ObstacleManager()
         self.power_up_manager = PowerUpManager()
+        self.ret_x_pos = 80
+        self.ret_y_pos = 220
+        #self.ret_vermelho = pygame.draw.rect(self.screen, (255, 0, 0),
+             #                                (self.ret_x_pos, self.ret_y_pos, 40, 50))
+
     def execute(self):
         self.running = True
         while self.running:
@@ -53,17 +58,20 @@ class Game:
             self.update()
             self.draw()
 
+
     def events(self):
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 self.playing = False
                 self.running = False
 
-
+#a
     def update(self):
         user_input = pygame.key.get_pressed()
         self.player.update(user_input)
         self.obstacle_manager.update(self)
+
+
         self.update_score()
         self.power_up_manager.update(self.score, self.game_speed, self.player)
 
@@ -94,6 +102,8 @@ class Game:
             self.screen.blit(BG, (image_width + self.x_pos_bg, self.y_pos_bg))
             self.x_pos_bg = 0
         self.x_pos_bg -= self.game_speed
+        #self.ret_vermelho = pygame.draw.rect(self.screen, (255, 0, 0),
+               #                              (self.ret_x_pos, self.ret_y_pos, 40, 50))
     def draw_score(self): #Tamanho da fonte
         draw_message_component(
             f"Score {self.score}",

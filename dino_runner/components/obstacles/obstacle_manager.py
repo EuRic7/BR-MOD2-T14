@@ -7,6 +7,7 @@ from dino_runner.components.obstacles.cactus import Cactus
 from dino_runner.components.obstacles.bird import Bird
 from dino_runner.components.obstacles.meteor import Meteor
 from dino_runner.components.obstacles.meteor_2 import Meteor_2
+
 class ObstacleManager:
     def __init__(self):
         self.obstacles = []
@@ -34,9 +35,12 @@ class ObstacleManager:
                     game.playing = False
                     game.death_count += 1
                     break
+#a
                 else:
                     self.obstacles.remove(obstacle)
-
+            if obstacle.rect.colliderect(game.player.ret_vermelho):
+                self.obstacles.remove(obstacle)
+                game.score += 1000
     def reset_obstacles(self):
         self.obstacles = []
 
