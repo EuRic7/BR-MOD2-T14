@@ -16,3 +16,4 @@ class Cactus(Obstacle):
         self.rect.y = cactus_pos
         self.obstacle_vel = 20
 
+
